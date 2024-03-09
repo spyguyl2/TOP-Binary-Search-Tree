@@ -14,7 +14,28 @@ const Tree = (array) => {
     return node;
   }
 
-  const insert = (value) => {
+  const getParentOf = (value) => {
+    let currentNode = root;
+    while (currentNode.data !== null) {
+
+    }
+  }
+
+  const insert = (value, currentNode) => {
+    if (currentNode.data === null || currentNode.data === value) return null;
+    
+
+    if (currentNode.data < value) {
+      if(currentNode.left === null) currentNode.left = createNode(value);
+      currentNode = currentNode.left;
+      insert(value, currentNode)
+    }
+    else {
+      if(currentNode.right === null) currentNode.right = createNode(value);
+      currentNode = currentNode.right;
+      insert(value, currentNode);
+    }
+    
     
   }
 
@@ -32,7 +53,7 @@ const Tree = (array) => {
     
     let root = buildTree(array, 0, array.length - 1);
     
-    return {root};
+    return {root, insert, deleteItem};
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
@@ -50,5 +71,5 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
  
 
   let tree = Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
-  
+  tree.insert(2, tree.root);
   prettyPrint(tree.root);
