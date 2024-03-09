@@ -3,25 +3,32 @@ const createNode = (data, left = null, right = null) => {
 }
 
 const Tree = (array) => {
-    array.sort();
+  const buildTree = (array, start, end) => {
+    if (start > end) return null;
     
-    for (let i = 0; i < array.length - 1; i++) {
-        const element = array[i];
-        const nextElement = array[i+1];
+    const mid = Math.floor((start + end) / 2);
+    const node = createNode(array[mid]);
+    
+    node.left = buildTree(array, start, mid - 1);
+    node.right = buildTree(array, mid + 1, end);
+    return node;
+  }
 
-        if (element === nextElement) array.splice(array.indexOf(element), 1);
-    }
+  const insert = (value) => {
+    
+  }
 
-    const buildTree = (array, start, end) => {
-      if (start > end) return null;
-      
-      const mid = parseInt((start + end) / 2);
-      const node = createNode(array[mid]);
-      
-      node.left = buildTree(array, start, mid -1);
-      node.right = buildTree(array, mid + 1, end);
-      return node;
-    }
+  const deleteItem = (value) => {
+
+  }
+  
+  array.sort((a, b) => a - b);
+  for (let i = 0; i < array.length - 1; i++) {
+    const element = array[i];
+    const nextElement = array[i+1];
+    
+    if (element === nextElement) array.splice(array.indexOf(element), 1);
+  }
     
     let root = buildTree(array, 0, array.length - 1);
     
