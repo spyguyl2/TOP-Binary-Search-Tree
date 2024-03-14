@@ -13,13 +13,6 @@ export const Tree = (array) => {
     node.right = buildTree(array, mid + 1, end);
     return node;
   }
-//might not need this
-  const getParentOf = (value) => {
-    let currentNode = root;
-    while (currentNode.data !== null) {
-
-    }
-  }
 
   const insert = (value, currentNode) => {
     if (currentNode.data === null || currentNode.data === value) return null;
@@ -38,7 +31,7 @@ export const Tree = (array) => {
   }
 
   const deleteItem = (value) => {
-    const nodeToRemove = find(value);
+    let nodeToRemove = find(value, root);
     if (nodeToRemove.left === null && nodeToRemove.right === null) nodeToRemove = null;
     else if (nodeToRemove.left !== null && nodeToRemove.right !== null) {
 
@@ -52,9 +45,10 @@ export const Tree = (array) => {
     }
   }
 
-
   const find = (value, currentNode) => { 
-    if (currentNode.data === value) return currentNode;
+    if (currentNode.data === value) {
+      return currentNode;
+    }
     while (currentNode.data !== null || currentNode.data !== value) {
       if (value < currentNode.data) {
         if (currentNode.left === null) return null;
