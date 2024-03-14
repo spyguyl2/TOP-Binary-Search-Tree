@@ -54,7 +54,7 @@ export const Tree = (array) => {
 
 
   const find = (value, currentNode) => { 
-    if (currentNode.data === value) return currentNode.data;
+    if (currentNode.data === value) return currentNode;
     while (currentNode.data !== null || currentNode.data !== value) {
       if (value < currentNode.data) {
         if (currentNode.left === null) return null;
