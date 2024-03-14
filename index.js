@@ -13,7 +13,7 @@ const Tree = (array) => {
     node.right = buildTree(array, mid + 1, end);
     return node;
   }
-
+//might not need this
   const getParentOf = (value) => {
     let currentNode = root;
     while (currentNode.data !== null) {
@@ -25,7 +25,7 @@ const Tree = (array) => {
     if (currentNode.data === null || currentNode.data === value) return null;
     
 
-    if (currentNode.data < value) {
+    if (value < currentNode.data) {
       if(currentNode.left === null) currentNode.left = createNode(value);
       currentNode = currentNode.left;
       insert(value, currentNode)
@@ -35,14 +35,42 @@ const Tree = (array) => {
       currentNode = currentNode.right;
       insert(value, currentNode);
     }
-    
-    
   }
-
+/*        Under construction
   const deleteItem = (value) => {
+    const nodeToRemove = find(value);
+    if (nodeToRemove.left === null && nodeToRemove.right === null) nodeToRemove = null;
+    else if (nodeToRemove.left !== null && nodeToRemove.right !== null) {
 
+    }
+    else if (nodeToRemove.left || nodeToRemove.right) {
+
+    }
+    else {
+      console.log("Something went wrong. You shouldn't be seeing this message.");
+      return null;
+    }
+  }
+*/
+
+  const find = (value, currentNode) => { 
+    if (currentNode.data === value) return currentNode.data;
+    while (currentNode.data !== null || currentNode.data !== value) {
+      if (value < currentNode.data) {
+        if (currentNode.left === null) return null;
+        currentNode = currentNode.left;
+        return find(value, currentNode);
+      }
+      else {
+        if (currentNode.right === null) return null;
+        currentNode = currentNode.right;
+        return find(value, currentNode);
+      }
+    }
+    return null;
   }
   
+  //sort least to greatest, then remove duplicates
   array.sort((a, b) => a - b);
   for (let i = 0; i < array.length - 1; i++) {
     const element = array[i];
@@ -53,7 +81,9 @@ const Tree = (array) => {
     
     let root = buildTree(array, 0, array.length - 1);
     
-    return {root, insert, deleteItem};
+    return {root, insert, 
+      //deleteItem,
+       find};
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
@@ -71,5 +101,7 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
  
 
   let tree = Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
-  tree.insert(2, tree.root);
+  tree.insert(66, tree.root);
+
+  console.log(tree.find(23, tree.root));
   prettyPrint(tree.root);
