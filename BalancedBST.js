@@ -40,27 +40,31 @@ export const Tree = (array) => {
 
     }
     else {
-      console.log("Something went wrong. You shouldn't be seeing this message.");
+      console.log("The given value isn't in this Tree, or something went wrong.");
       return null;
     }
   }
 
-  const find = (value, currentNode) => { 
-    if (currentNode.data === value) {
-      return currentNode;
-    }
-    while (currentNode.data !== null || currentNode.data !== value) {
+  const getParent = (value, currentNode) => {
+    if (currentNode.data === value) return null;
+
+    while (currentNode.left !== value || currentNode.right !== value) {
       if (value < currentNode.data) {
-        if (currentNode.left === null) return null;
-        currentNode = currentNode.left;
-        return find(value, currentNode);
-      }
-      else {
-        if (currentNode.right === null) return null;
-        currentNode = currentNode.right;
-        return find(value, currentNode);
+        
       }
     }
+  }
+
+  const traverseTree = (value, currentNode) => {
+    if (value < currentNode.data) return currentNode = currentNode.left;
+    else if (value > currentNode.data) return currentNode = currentNode.right;
+    else return null;
+  }
+
+  const find = (value, currentNode) => { 
+    if (currentNode.data === value) return currentNode;
+    while (currentNode.data !== null || currentNode.data !== value) {
+      
     return null;
   }
   
@@ -81,4 +85,4 @@ export const Tree = (array) => {
       deleteItem,
       find
     };
-} 
+}
