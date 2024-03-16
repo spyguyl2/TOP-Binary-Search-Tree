@@ -65,6 +65,7 @@ export const Tree = (array) => {
     if (currentNode.data === value) return currentNode;
     while (currentNode.data !== null || currentNode.data !== value) {
       
+    }
     return null;
   }
   
